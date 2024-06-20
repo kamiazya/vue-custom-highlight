@@ -49,7 +49,7 @@ const applyHighlight: DirectiveHook<HTMLElement, any, Keyword> = (
   el,
   { arg: name = DEFAULT_HIGHLIGHT_NAME, value: keyword },
 ) => {
-  CSS.highlights.clear();
+  CSS.highlights.delete(name);
   const keywords = keyword ? toArray(keyword) : [];
   const ranges: Range[] = [...walkTextNodes(el)].flatMap((text) =>
     matchKeywordsRanges(text, keywords),
@@ -64,7 +64,7 @@ const removeHighlight: DirectiveHook<HTMLElement, any, Keyword> = (
   { arg: name = DEFAULT_HIGHLIGHT_NAME },
 ) => {
   CSS.highlights.delete(name);
-}
+};
 
 /**
  * Custom highlight directive.
@@ -131,11 +131,10 @@ const removeHighlight: DirectiveHook<HTMLElement, any, Keyword> = (
  * }
  * ```
  */
-export const vCustomHighlight: Directive<HTMLElement, Keyword> =
-  Object.freeze({
-    mounted: applyHighlight,
-    updated: applyHighlight,
-    unmounted: removeHighlight,
-  });
+export const vCustomHighlight: Directive<HTMLElement, Keyword> = Object.freeze({
+  mounted: applyHighlight,
+  updated: applyHighlight,
+  unmounted: removeHighlight,
+});
 
 export default vCustomHighlight;
