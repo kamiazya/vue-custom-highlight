@@ -5,13 +5,16 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
+    "check": "biome ci .",
     "build": "vite build",
+    "format": "biome check --write .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "Yuki Yamazaki <yuki@kamiazya.tech>",
   "license": "MIT",
   "devDependencies": {
+    "@biomejs/biome": "^1.8.1",
     "@vitejs/plugin-vue": "^5.0.5",
     "@vue/tsconfig": "^0.5.1",
     "typescript": "^5.4.5",

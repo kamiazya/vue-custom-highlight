@@ -1,1 +1,1 @@
-console.log('Hello from @kamiazya/vue-custom-highlight');
+console.log("Hello from @kamiazya/vue-custom-highlight");
