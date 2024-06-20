@@ -1,4 +1,5 @@
 import type { Directive, DirectiveHook } from "vue";
+import { escapeRegExp } from "./utils/escapeRegExp.js";
 
 export type Keyword = string | string[];
 
@@ -12,17 +13,6 @@ function* walkTextNodes(el: HTMLElement): Generator<Text> {
   while ((currentNode = treeWalker.nextNode()) !== null) {
     yield currentNode as Text;
   }
-}
-
-/**
- * Escape special characters in a regular expression.
- *
- * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions#escaping
- * @param string -
- * @returns
- */
-function escapeRegExp(string: string) {
-  return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
 function matchKeywordsRanges(text: Text, keywords: string[]): Range[] {
