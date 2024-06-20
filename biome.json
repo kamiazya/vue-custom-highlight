@@ -7,7 +7,8 @@
   },
   "files": {
     "ignoreUnknown": true,
-    "include": ["src/**/*", "vite.config.ts", "tsconfig.json", "biome.json"]
+    "include": ["src/**/*", "vite.config.ts", "tsconfig.json", "biome.json"],
+    "ignore": ["dist"]
   },
   "organizeImports": {
     "enabled": true
