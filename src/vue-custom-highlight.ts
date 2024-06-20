@@ -1,7 +1,7 @@
 import type { Directive, DirectiveHook } from "vue";
 import { escapeRegExp } from "./utils/escapeRegExp.js";
 
-export type Keyword = string | string[];
+export type Keyword = undefined | string | string[];
 
 function toArray(arrayOrItem: string | string[]) {
   return Array.isArray(arrayOrItem) ? arrayOrItem : [arrayOrItem];
@@ -33,7 +33,7 @@ function matchKeywordsRanges(text: Text, keywords: string[]): Range[] {
   return ranges;
 }
 
-const DEFAULT_HIGHLIGHT_NAME = "vue-custom-highlight";
+const DEFAULT_HIGHLIGHT_NAME = "v-custom-highlight";
 
 const applyHighlight: DirectiveHook<HTMLElement, any, Keyword> = (
   el,
@@ -75,10 +75,11 @@ const removeHighlight: DirectiveHook<HTMLElement, any, Keyword> = (
  *   </div>
  * </template>
  * <style>
- * ::highlight {
+ * ::highlight(v-custom-highlight) {
  *   background-color: yellow;
  *   color: black;
  * }
+ * </style>
  * ```
  *
  * @example **Multiple keywords:** Highlight the keywords "foo" and "baz" in the text "foo bar baz".
@@ -97,6 +98,12 @@ const removeHighlight: DirectiveHook<HTMLElement, any, Keyword> = (
  *   foo bar baz
  * </div>
  * </template>
+ * <style>
+ * ::highlight(v-custom-highlight) {
+ *   background-color: yellow;
+ *   color: black;
+ * }
+ * </style>
  * ```
  *
  * @example **Custom highlight name:** Highlight the keyword "bar" in the text "foo bar baz" with a custom highlight name.
@@ -119,6 +126,7 @@ const removeHighlight: DirectiveHook<HTMLElement, any, Keyword> = (
  *   background-color: yellow;
  *   color: black;
  * }
+ * </style>
  * ```
  */
 export const vCustomHighlight: Directive<HTMLElement, Keyword> = Object.freeze({
