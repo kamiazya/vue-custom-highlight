@@ -1,0 +1,20 @@
+{
+  "name": "@kamiazya/vue-custom-highlight-example",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "vite serve",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@kamiazya/vue-custom-highlight": "workspace:*",
+    "vue": "^3.4.29"
+  },
+  "devDependencies": {
+    "vite": "^5.3.1"
+  }
+}
