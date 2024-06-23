@@ -46,6 +46,19 @@ const keyword = ref("bar");
 </style>
 ```
 
+If you want to use `v-highlight` directive in global, you can register the `vHighlight` direvtive to app instance.
+
+```ts
+import { vHighlight } from '@kamiazya/vue-highlight'; // Import the directive
+import { createApp } from 'vue';
+
+import App from './src/App.vue';
+
+const app = createApp(App);
+app.directive('highlight', vHighlight); // Register the directive
+app.mount('#container');
+```
+
 ### Multiple keywords
 
 Highlight the keywords `"foo"` and `"baz"` in the text `"foo bar baz"`.
