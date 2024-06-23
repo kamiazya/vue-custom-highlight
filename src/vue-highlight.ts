@@ -90,7 +90,6 @@ const removeHighlight: DirectiveHook<HTMLElement, any, Keyword> = (
  *
  * ```vue
  * <script setup>
- *
  * import { ref } from "vue";
  * import vHighlight from "@kamiazya/vue-highlight";
  *
