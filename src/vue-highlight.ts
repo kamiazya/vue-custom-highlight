@@ -3,53 +3,48 @@ import { escapeRegExp } from "./utils/escapeRegExp.js";
 
 export type Keyword = undefined | string | string[];
 
-function toArray(arrayOrItem: string | string[]) {
-  return Array.isArray(arrayOrItem) ? arrayOrItem : [arrayOrItem];
-}
+const DEFAULT_HIGHLIGHT_NAME = "v-highlight";
 
-function* walkTextNodes(el: HTMLElement): Generator<Text> {
-  const treeWalker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+function* walkTextNodes(element: HTMLElement): Generator<Text> {
+  const treeWalker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT);
   let currentNode: Node | null;
   while ((currentNode = treeWalker.nextNode()) !== null) {
     yield currentNode as Text;
   }
 }
 
-function matchKeywordsRanges(text: Text, keywords: string[]): Range[] {
-  if (!text.textContent) {
-    return [];
-  }
-  const ranges: Range[] = [];
-  for (const keyword of keywords) {
-    const matcher = new RegExp(escapeRegExp(keyword), "g");
-    let match: RegExpExecArray | null;
-    while ((match = matcher.exec(text.textContent)) !== null) {
-      const range = new Range();
-      range.setStart(text, match.index);
-      range.setEnd(text, match.index + match[0].length);
-      ranges.push(range);
+function* getMatchRanges(element: HTMLElement, keyword: string | string[]) {
+  const matchers = (Array.isArray(keyword) ? keyword : [keyword])
+    .filter((v) => v !== "")
+    .map((keyword) => new RegExp(escapeRegExp(keyword), "g"));
+  for (const text of walkTextNodes(element)) {
+    for (const matcher of matchers) {
+      let match: RegExpExecArray | null;
+      while (
+        text.textContent &&
+        (match = matcher.exec(text.textContent)) !== null
+      ) {
+        const range = new Range();
+        range.setStart(text, match.index);
+        range.setEnd(text, match.index + match[0].length);
+        yield range;
+      }
     }
   }
-  return ranges;
 }
 
-const DEFAULT_HIGHLIGHT_NAME = "v-highlight";
-
 const applyHighlight: DirectiveHook<HTMLElement, any, Keyword> = (
-  el,
-  { arg: name = DEFAULT_HIGHLIGHT_NAME, value: keyword },
+  element,
+  { arg: name = DEFAULT_HIGHLIGHT_NAME, value: keyword = [] },
 ) => {
   CSS.highlights.delete(name);
-  const keywords = keyword ? toArray(keyword) : [];
-  const ranges: Range[] = [...walkTextNodes(el)].flatMap((text) =>
-    matchKeywordsRanges(text, keywords),
-  );
-  if (ranges.length >= 0) {
-    CSS.highlights.set(name, new Highlight(...ranges));
+  const highlight = new Highlight(...getMatchRanges(element, keyword));
+  if (highlight.size >= 0) {
+    CSS.highlights.set(name, highlight);
   }
 };
 
-const removeHighlight: DirectiveHook<HTMLElement, any, Keyword> = (
+const removeHighlight: DirectiveHook<any, any, Keyword> = (
   _,
   { arg: name = DEFAULT_HIGHLIGHT_NAME },
 ) => {
@@ -163,10 +158,8 @@ const removeHighlight: DirectiveHook<HTMLElement, any, Keyword> = (
  * </style>
  * ```
  */
-export const vHighlight: Directive<HTMLElement, Keyword> = Object.freeze({
+export const vHighlight: Directive<any, Keyword> = Object.freeze({
   mounted: applyHighlight,
   updated: applyHighlight,
   unmounted: removeHighlight,
 });
-
-export default vHighlight;
