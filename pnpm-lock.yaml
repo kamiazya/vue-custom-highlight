@@ -32,7 +32,7 @@ importers:
 
   example:
     dependencies:
-      '@kamiazya/vue-custom-highlight':
+      '@kamiazya/vue-highlight':
         specifier: workspace:*
         version: link:..
       vue:

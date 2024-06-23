@@ -33,7 +33,7 @@ function matchKeywordsRanges(text: Text, keywords: string[]): Range[] {
   return ranges;
 }
 
-const DEFAULT_HIGHLIGHT_NAME = "v-custom-highlight";
+const DEFAULT_HIGHLIGHT_NAME = "v-highlight";
 
 const applyHighlight: DirectiveHook<HTMLElement, any, Keyword> = (
   el,
@@ -57,25 +57,25 @@ const removeHighlight: DirectiveHook<HTMLElement, any, Keyword> = (
 };
 
 /**
- * Custom highlight directive.
+ * Highlight directive.
  *
  * @example **Basic usage:** Highlight the keyword "bar" in the text "foo bar baz".
  *
  * ```vue
  * <script setup>
  * import { ref } from "vue";
- * import vCustomHighlight from "@kamiazya/vue-custom-highlight";
+ * import vHighlight from "@kamiazya/vue-highlight";
  *
  * const keyword = ref("bar");
  * </script>
  *
  * <template>
- *   <div v-custom-highlight="keyword">
+ *   <div v-highlight="keyword">
  *     foo bar baz
  *   </div>
  * </template>
  * <style>
- * ::highlight(v-custom-highlight) {
+ * ::highlight(v-highlight) {
  *   background-color: yellow;
  *   color: black;
  * }
@@ -88,18 +88,18 @@ const removeHighlight: DirectiveHook<HTMLElement, any, Keyword> = (
  * <script setup>
  *
  * import { ref } from "vue";
- * import vCustomHighlight from "@kamiazya/vue-custom-highlight";
+ * import vHighlight from "@kamiazya/vue-highlight";
  *
  * const keyword = ref(["foo", "baz"]);
  * </script>
  *
  * <template>
- *  <div v-custom-highlight="keyword">
+ *  <div v-highlight="keyword">
  *   foo bar baz
  * </div>
  * </template>
  * <style>
- * ::highlight(v-custom-highlight) {
+ * ::highlight(v-highlight) {
  *   background-color: yellow;
  *   color: black;
  * }
@@ -111,28 +111,58 @@ const removeHighlight: DirectiveHook<HTMLElement, any, Keyword> = (
  * ```vue
  * <script setup>
  * import { ref } from "vue";
- * import vCustomHighlight from "@kamiazya/vue-custom-highlight";
+ * import vHighlight from "@kamiazya/vue-highlight";
  *
  * const keyword = ref("bar");
  * </script>
  *
  * <template>
- *  <div v-custom-highlight:custom="keyword">
+ *  <div v-highlight:my-custom-highlight="keyword">
  *  foo bar baz
  * </div>
  * </template>
  * <style>
- * ::highlight(custom) {
+ * ::highlight(my-custom-highlight) {
  *   background-color: yellow;
  *   color: black;
  * }
  * </style>
  * ```
+ *
+ * @example **Multiple highlights:** Highlight the keywords "foo" and "baz" in the text "foo bar baz" with multiple highlights.
+ *
+ * ```vue
+ * <script setup>
+ * import { ref } from "vue";
+ * import vHighlight from "@kamiazya/vue-highlight";
+ *
+ * const keyword1 = ref("bar");
+ * const keyword2 = ref("foo");
+ * </script>
+ *
+ * <template>
+ * <div
+ *   v-highlight:highlight1="keyword1"
+ *   v-highlight:highlight2="keyword2"
+ * >
+ *  foo bar baz
+ * </div>
+ * </template>
+ * <style>
+ * ::highlight(highlight1) {
+ *   background-color: yellow;
+ *   color: black;
+ * }
+ * ::highlight(highlight2) {
+ *   background-color: red;
+ *   color: white;
+ * }
+ * </style>
  */
-export const vCustomHighlight: Directive<HTMLElement, Keyword> = Object.freeze({
+export const vHighlight: Directive<HTMLElement, Keyword> = Object.freeze({
   mounted: applyHighlight,
   updated: applyHighlight,
   unmounted: removeHighlight,
 });
 
-export default vCustomHighlight;
+export default vHighlight;

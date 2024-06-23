@@ -1,5 +1,5 @@
 {
-  "name": "@kamiazya/vue-custom-highlight-example",
+  "name": "@kamiazya/vue-highlight-example",
   "version": "0.0.0",
   "description": "",
   "main": "index.js",
@@ -11,7 +11,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@kamiazya/vue-custom-highlight": "workspace:*",
+    "@kamiazya/vue-highlight": "workspace:*",
     "vue": "^3.4.29"
   },
   "devDependencies": {

@@ -1,28 +1,29 @@
 {
-  "name": "@kamiazya/vue-custom-highlight",
+  "name": "@kamiazya/vue-highlight",
   "version": "0.0.0",
   "description": "",
   "type": "module",
-  "main": "src/vue-custom-highlight.ts",
-  "module": "src/vue-custom-highlight.ts",
+  "main": "src/vue-highlight.ts",
+  "module": "src/vue-highlight.ts",
+  "types": "src/vue-highlight.ts",
   "exports": {
     ".": {
-      "import": "./src/vue-custom-highlight.ts",
-      "require": "./src/vue-custom-highlight.ts",
-      "types": "./src/vue-custom-highlight.ts"
+      "import": "./src/vue-highlight.ts",
+      "require": "./src/vue-highlight.ts",
+      "types": "./src/vue-highlight.ts"
     },
     "./package.json": "./package.json"
   },
   "publishConfig": {
     "access": "public",
-    "main": "./dist/vue-custom-highlight.cjs",
-    "module": "./dist/vue-custom-highlight.js",
-    "types": "./dist/vue-custom-highlight.d.ts",
+    "main": "./dist/vue-highlight.cjs",
+    "module": "./dist/vue-highlight.js",
+    "types": "./dist/vue-highlight.d.ts",
     "exports": {
       ".": {
-        "import": "./dist/vue-custom-highlight.js",
-        "require": "./dist/vue-custom-highlight.cjs",
-        "types": "./dist/vue-custom-highlight.d.ts"
+        "import": "./dist/vue-highlight.js",
+        "require": "./dist/vue-highlight.cjs",
+        "types": "./dist/vue-highlight.d.ts"
       },
       "./package.json": "./package.json"
     }

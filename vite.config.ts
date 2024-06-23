@@ -5,8 +5,8 @@ import dts from "vite-plugin-dts";
 export default defineConfig({
   build: {
     lib: {
-      entry: "src/vue-custom-highlight.ts",
-      name: "VueCustomHighlight",
+      entry: "src/vue-highlight.ts",
+      name: "VueHighlight",
       formats: ["es", "cjs"],
     },
     rollupOptions: {

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { vCustomHighlight } from "@kamiazya/vue-custom-highlight";
+import { vHighlight } from '@kamiazya/vue-highlight';
 import { ref } from "vue";
 
 import sample from "./assets/sample.txt?raw";
@@ -10,11 +10,11 @@ const text = ref(sample);
 
 <template>
   <input v-model="keyword" type="search" />
-  <div v-custom-highlight="keyword">{{ text }}</div>
+  <div v-highlight="keyword">{{ text }}</div>
 </template>
 
 <style>
-::highlight(v-custom-highlight) {
+::highlight(v-highlight) {
   background-color: yellow;
 }
 </style>
