@@ -1,7 +1,5 @@
 {
-  "extends": [
-    "@vue/tsconfig/tsconfig.json",
-  ],
+  "extends": ["@vue/tsconfig/tsconfig.json"],
   "compilerOptions": {
     "types": ["vite/client"]
   }
