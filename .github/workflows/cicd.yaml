@@ -1,0 +1,68 @@
+name: CI/CD
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
+jobs:
+  check:
+    name: Check
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+      - name: Setup
+        uses: ./.github/actions/setup
+      - name: Check
+        run: pnpm check
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+      - name: Setup
+        uses: ./.github/actions/setup
+      - name: Build
+        run: pnpm build
+      - name: Upload Artifact
+        uses: actions/upload-artifact@65462800fd760344b1a7b4382951275a0abb4808 # v4.3.3
+        with:
+          name: dist
+          path: dist
+
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    needs:
+      - build
+    # Only run on main branch and when previous jobs are successful
+    if: ${{ github.repository == 'kamiazya/vue-highlight' && github.ref == 'refs/heads/main' && success() }}
+    permissions:
+      contents: write # Used to commit to "Version Packages" PR
+      pull-requests: write # Used to create "Version Packages" PR
+      id-token: write # Used to publish to npm with provenance statements
+      # Other permissions are defaulted to none
+    steps:
+      - name: Checkout
+        uses: actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29 # v4.1.6
+      - name: Setup
+        uses: ./.github/actions/setup
+      - name: Download Artifact
+        uses: actions/download-artifact@65a9edc5881444af0b9093a5e628f2fe47ea3b2e # v4.1.7
+      - name: Create Release Pull Request or Publish to npm
+        uses: changesets/action@aba318e9165b45b7948c60273e0b72fce0a64eb9 # v1.4.7
+        with:
+          publish: pnpm changeset publish
+          version: pnpm changeset version
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
