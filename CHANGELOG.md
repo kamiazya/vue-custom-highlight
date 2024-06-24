@@ -1,11 +1,5 @@
 # @kamiazya/vue-highlight
 
-## 0.0.2
-
-### Patch Changes
-
-- [`3fe4317`](https://github.com/kamiazya/vue-highlight/commit/3fe431761147500ea6e131c53e13c8dabf2117ef) Thanks [@kamiazya](https://github.com/kamiazya)! - chore: Add "provenance" flag
-
 ## 0.0.1
 
 ### Patch Changes
