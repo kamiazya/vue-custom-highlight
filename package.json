@@ -1,6 +1,6 @@
 {
   "name": "@kamiazya/vue-highlight",
-  "version": "0.0.2",
+  "version": "0.0.1",
   "description": "Vue(3+) directive for highlighting keywords in text",
   "type": "module",
   "main": "src/vue-highlight.ts",
