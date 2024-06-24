@@ -21,6 +21,7 @@
   ],
   "publishConfig": {
     "access": "public",
+    "provenance": true,
     "main": "./dist/vue-highlight.cjs",
     "module": "./dist/vue-highlight.js",
     "types": "./dist/vue-highlight.d.ts",
