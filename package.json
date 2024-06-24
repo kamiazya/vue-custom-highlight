@@ -40,9 +40,23 @@
     "format": "biome check --write .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
+  "keywords": [
+    "vue",
+    "vue3",
+    "vue-directive",
+    "highlight",
+    "custom-highlight"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kamiazya/vue-highlight.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kamiazya/vue-highlight/issues"
+  },
   "author": "Yuki Yamazaki <yuki@kamiazya.tech>",
   "license": "MIT",
+  "sideEffects": false,
   "peerDependencies": {
     "vue": "^3.x"
   },
