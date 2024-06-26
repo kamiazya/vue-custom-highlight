@@ -8,6 +8,10 @@ Vue(3+) directive for highlighting keywords in text.
 > You can highlight matching keywords in the text within a given element with your own CSS.
 >
 > Internally, it uses the [Custom Highlighting API](https://developer.mozilla.org/en-US/docs/Web/API/CSS_Custom_Highlight_API), so it does not corrupt the DOM.
+>
+> This API is not implemented in all browsers, so please check if it is supported by the supporting browsers before use.
+> 
+> For more information, [click here](https://developer.mozilla.org/en-US/docs/Web/API/Highlight#browser_compatibility).
 
 ## Installation 📥
 
